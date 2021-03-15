@@ -1,2 +1,10 @@
-# zillow_regression_project
+
 My Regression Project
+
+# acquire 
+
+# prepare
+
+# modeling
+
+
