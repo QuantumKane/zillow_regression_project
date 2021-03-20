@@ -22,6 +22,6 @@ def get_zillow_data():
                 FROM properties_2017
                 JOIN predictions_2017 USING(parcelid)
                 WHERE transactiondate BETWEEN "2017-05-01" AND "2017-08-31"
-                AND propertylandusetypeid = 261 OR 263 OR 273 OR 279;
+                AND propertylandusetypeid = 261 AND 273 AND 279;
                 """
     return pd.read_sql(sql_query,get_connection('zillow'))
