@@ -14,18 +14,16 @@ def clean_zillow(df):
     # Rename some columns for ease-of-use
     df = df.rename(columns={"bedroomcnt": "bedrooms", "bathroomcnt": "bathrooms", "calculatedfinishedsquarefeet": "square_feet", 
                         "taxamount": "taxes", "regionidzip": "zip_code", "taxvaluedollarcnt": "appraisal_value", 
-                        "yearbuilt": "year_built", "regionidcity": "city", "regionidcounty": "county"})
+                        "yearbuilt": "year_built", "regionidcity": "city"})
     
     
     # Drop redundant or unnecessary columns
-    df = df.drop(['parcelid', 'airconditioningtypeid', 'architecturalstyletypeid', 'basementsqft', 'buildingclasstypeid', 'buildingqualitytypeid', 'calculatedbathnbr', 'decktypeid', 'finishedfloor1squarefeet', 'finishedsquarefeet12', 'finishedsquarefeet13', 'finishedsquarefeet15', 'finishedsquarefeet50', 'finishedsquarefeet6', 'fireplacecnt', 'fullbathcnt', 'garagecarcnt', 'garagetotalsqft', 'hashottuborspa', 'heatingorsystemtypeid', 'poolcnt', 'poolsizesum', 'pooltypeid10', 'pooltypeid2', 'pooltypeid7', 'lotsizesquarefeet', 'propertyzoningdesc', 'propertycountylandusecode', 'taxdelinquencyyear', 'roomcnt', 'taxdelinquencyflag', 'regionidneighborhood', 'threequarterbathnbr', 'fireplaceflag', 'numberofstories', 'yardbuildingsqft26', 'yardbuildingsqft17', 'typeconstructiontypeid', 'unitcnt', 'storytypeid', 'logerror', 'transactiondate', 'id', 'rawcensustractandblock', 'censustractandblock', 'assessmentyear', 'propertylandusetypeid', 'landtaxvaluedollarcnt', 'structuretaxvaluedollarcnt', 'latitude'],axis=1)
+    df = df.drop(['parcelid', 'airconditioningtypeid', 'architecturalstyletypeid', 'basementsqft', 'buildingclasstypeid', 'buildingqualitytypeid', 'calculatedbathnbr', 'decktypeid', 'finishedfloor1squarefeet', 'finishedsquarefeet12', 'finishedsquarefeet13', 'finishedsquarefeet15', 'finishedsquarefeet50', 'finishedsquarefeet6', 'fireplacecnt', 'fullbathcnt', 'garagecarcnt', 'garagetotalsqft', 'hashottuborspa', 'heatingorsystemtypeid', 'poolcnt', 'poolsizesum', 'pooltypeid10', 'pooltypeid2', 'pooltypeid7', 'lotsizesquarefeet', 'propertyzoningdesc', 'propertycountylandusecode', 'taxdelinquencyyear', 'roomcnt', 'taxdelinquencyflag', 'regionidneighborhood', 'threequarterbathnbr', 'fireplaceflag', 'numberofstories', 'yardbuildingsqft26', 'yardbuildingsqft17', 'typeconstructiontypeid', 'unitcnt', 'storytypeid', 'logerror', 'transactiondate', 'id', 'rawcensustractandblock', 'censustractandblock', 'assessmentyear', 'propertylandusetypeid', 'landtaxvaluedollarcnt', 'structuretaxvaluedollarcnt', 'latitude', 'regionidcounty'],axis=1)
     
-    # Remove decimals from latitude and longitude
-    df['latitude'] = df['latitude'].astype(int)
+    # Remove decimals from longitude
     df['longitude'] = df['longitude'].astype(int)
     
-    # Convert lat and long to positional/standard-format datapoints
-    df['latitude'] = df['latitude'].apply(lambda x: x / 10 ** (len((str(x))) - 2))
+    # Convert longitude to positional/standard-format datapoints
     df['longitude'] = df['longitude'].apply(lambda x: x / 10 ** (len((str(x))) - 4))
     
     # Drop the nulls
