@@ -1,7 +1,7 @@
 
-# **Regression Project Using Zillow**
+# **Regression Project - Zillow**
 
-## Planning the project
+# Planning the project
 ### Goals
 The goal of this project is to be able to predict the values of single unit properties that the tax district assesses using the property data from those with a transaction during the months of May-August, 2017.
 
@@ -15,59 +15,47 @@ The goal of this project is to be able to predict the values of single unit prop
 > - Slideshow
 
 ### Some Context
-Why is customer loyalty important? What is the cost of churn over time?
-According to Patrick Campbell from [ProfitWell](https://www.profitwell.com/customer-churn/analysis),
->"Even seemingly small, single-figure increases in churn rate 
->can quickly have a major negative effect on your company’s ability 
->to grow. What’s more, high churn rates are more likely to compound 
->over time."
+What are the key factors that impact the value of your home?
+According to Marian White from [moving.com](https://www.moving.com/tips/7-key-factors-that-impact-the-value-of-your-home/), the top two factors are location and square footage.
+>"Ask any Realtor what the most important factor is when it comes to a 
+>home’s value, and they’ll tell you: “location, location, location.” 
+>The size of the home is the nextimportant factor in determining 
+>the value of your home."
+
+## Inital Questions and Hypotheses
+### Questions
+- Does square footage affect tax value?
+- Are the number of bathrooms related to the house value?
+- Are the number of bedrooms related to the house value?
+### Hypotheses
+### Does square footage affect tax value?
+`Null Hypothesis: The average price of homes with 3000 sq.ft. or more is equal to the average price of homes with 3000 sq.ft. or less`
+`Alternate Hypothesis: Homes with 3000 sq.ft. or more have higher than average tax dollar count`
+
+### Are the number of bathrooms related to the house value?
+`Null Hypothesis: The number of bathrooms is independent to the value of the home`
+`Alternate Hypothesis: The number of bathrooms is related to the value of the home`
+
+### Are the number of bedrooms related to the house value?
+`Null Hypothesis: The number of bedrooms is independent to the value of the home`
+`Alternate Hypothesis: The number of bedrooms is related to the value of the home`
 
 ### Data Dictionary
 
 After prepping the dataframe, the variables are the following:
 
-| Feature                       | Definition                            | Data Type                          |
-|-------------------------------|---------------------------------------|------------------------------------|
-|contract_type_id               |monthly, year, or two-year             |int - (0-2)                         |
-|payment_type_id                |type of payment                        |int - (0-2)                         |
-|customer_id                    |unique identifier                      |object                              |
-|partner                        |has partner or not                     |int - boolean                       |
-|dependents                     |has dependents or not                  |int - boolean                       |
-|phone_service                  |one or multiple lines, or no service   |int - (0-2)                         |
-|multiple lines                 |multiple lines or not                  |object                              |
-|internet_service_type          |DSL, fiber optic, or no service        |object                              |
-|online_security_1              |security or not                        |int - boolean                       |
-|online_backup                  |backup or not                          |int - boolean                       |
-|device_protection              |protection or not                      |int - boolean                       |
-|tech_support_1                 |support or not                         |int - boolean                       |
-|streaming_tv                   |streaming or not                       |int - boolean                       |
-|streaming_movies               |streaming or not                       |int - boolean                       |
-|contract_type                  |monthy, 1 year, 2 year                 |object                              |
-|paperless_billing              |paperless or mailed bills              |int - boolean                       |
-|monthly charges                |in USD                                 |float                               |
-|churn                          |customer has left the company or not   |int - boolean                       |
-|tenure (months or years)       |length the customer has remained       |int for months, float for years     |
-|internet_service_type_id_orig  |DSL, fiber optic, or no service        |int - (0-2)                         |
-|tech_support_orig              |tech support or not                    |int - boolean                       |
-|internet_service_type_2        |DSL or not                             |int - boolean                       |                 
-|internet_service_type_3        |Fiber Optic or not                     |int - boolean                       |
-|payment type                   |check or bank transfer                 |object                              |
-|online_security_orig           |security or not                        |int - boolean                       |
-
-
-
-## Inital Questions and Hypotheses
-### Questions
-- Does square footage affect tax value?
-- ?
-### Hypotheses
-### Does square footage affect tax value?
-`Null Hypothesis: The average price of homes with 4000 sq.ft. or more is equal to the average price of homes with 4000 sq.ft. or less`
-`Alternate Hypothesis: Homes with 4000 sq.ft. or more have higher than average tax dollar count`
-
-Is there a difference between the means of monthly_charges for fiber customers who have tech support and those who don't? 
-`Null Hypothesis: There is no difference between the means of monthly charges for fiber customers who have tech support and those who don't`
-`Alternate Hypothesis: There is a difference between the means of monthly_charges for fiber customers who have tech support and those who don't`
+| Feature         | Description                                                |  Data Type 
+|-----------------|------------------------------------------------------------|------------
+| bathrooms       | Number of bathrooms in home including fractional bathrooms | float64    
+| bedrooms        | Number of bedrooms in home                                 | float64     
+| square_feet     | Calculated total finished living area of the home          | float64   
+| fips            | Federal Information Processing Standard code               | float64    
+| longitude       | Longitude of the middle of the parcel                      | float64     
+| city            | City in which the property is located (if any)             | float64    
+| zip_code        | Zip code in which the property is located                  | float64    
+| year_built      | The Year the principal residence was built                 | float64    
+| appraisal_value | The total tax assessed value of the parcel                 | float64    
+| taxes           | The total property tax assessed for that assessment year   | float64    
 
 ****
 # **Project Steps**
@@ -81,26 +69,26 @@ Is there a difference between the means of monthly_charges for fiber customers w
 - Removed outliers from appraisal_value and square_feet
 
 ## Explore
-- Finding which features have the highest correlation to churn
-- Testing hypothesis with T-test
-- Visualizing churn with plots
+- Finding which features have the highest correlation to home value
+- Testing initial hypothesis with T-test and correlation tests
+- Visualizing variable correlation with plots
 
 ## Model
 After splitting and exploring the data, we progress to modeling.  
-With the train data set, try four different classification models, determining which data features and model parameters create better predictions.
-- 2 different Logistic Regression Models
-- Decision Tree
-- Random Forest
+With the train data set, try 3 different regression models, determining which data features and model parameters create better predictions.
+- OLS Regression Model
+- Lasso/Lars Model
+- Polynomial Model
 
 Evaluate the best model on the test data set
 ### Outcome
-- The first Logistic Regression Model had the best reults, if only slightly
-- That model performed even better on the test data
+- The OLS Regressor and the Lasso/Lars performed equally as well. I decided to use the OLS model.
+- The OLS model performed just slightly worse on the test data
 
 # **How to Reproduce**
 - Read this README.md
-- Download the aquire.py, prepare.py, and project_report.ipynb into your working directory
-- Run the project_report.ipynb notebook
+- Download the aquire.py, prepare.py, and zillow_project_report.ipynb into your working directory
+- Run the zillow_project_report notebook
 
 
 
