@@ -1,7 +1,7 @@
 
 # **Regression Project - Zillow**
 
-# Planning the project
+# **Planning the project**
 ### Goals
 The goal of this project is to be able to predict the values of single unit properties that the tax district assesses using the property data from those with a transaction during the months of May-August, 2017.
 
