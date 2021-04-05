@@ -1,0 +1,42 @@
+
+
+# Then Scale:
+    # Create the Scaling Object
+    scaler = sklearn.preprocessing.MinMaxScaler()
+
+    # Fit to the train data only
+    scaler.fit(train.drop('tax_value', axis=1))
+
+    # Use the object on the whole df
+    # This returns an array, so convert to df
+    train_scaled = pd.DataFrame(scaler.transform(train.drop('tax_value', axis=1)))
+    validate_scaled = pd.DataFrame(scaler.transform(validate.drop('tax_value', axis=1)))
+    test_scaled = pd.DataFrame(scaler.transform(test.drop('tax_value', axis=1)))
+
+    # The result of changing an array to a df resets the index and columns
+    # For each train, validate, and test, change the index and columns back to original values
+    # Train
+    train_scaled.index = train.index
+    train_scaled.columns = ['bathrooms_scaled','bedrooms_scaled','square_feet_scaled']
+    train = pd.concat((train, train_scaled), axis=1)
+
+    # Validate
+    validate_scaled.index = validate.index
+    validate_scaled.columns = ['bathrooms_scaled','bedrooms_scaled','square_feet_scaled']
+    validate = pd.concat((validate, validate_scaled), axis=1)
+
+    # Test
+    test_scaled.index = test.index
+    test_scaled.columns = ['bathrooms_scaled','bedrooms_scaled','square_feet_scaled']
+    test = pd.concat((test, test_scaled), axis=1)
+
+    return train, validate, test
+    
+    
+# Calculate the percentage of unique county instances, assigning to a seperate dataframe
+
+county_dist = pd.DataFrame(df.groupby('county_name').county_name.count())
+county_dist.columns = ['count']
+county_dist['frequency'] = df['county_name'].value_counts(normalize=True)
+county_dist['percentage'] = round(county_dist['frequency'] * 100)
+county_dist

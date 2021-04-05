@@ -19,7 +19,7 @@ What are the key factors that impact the value of your home?
 According to Marian White from [moving.com](https://www.moving.com/tips/7-key-factors-that-impact-the-value-of-your-home/), the top two factors are location and square footage.
 >"Ask any Realtor what the most important factor is when it comes to a 
 >home’s value, and they’ll tell you: “location, location, location.” 
->The size of the home is the nextimportant factor in determining 
+>The size of the home is the next important factor in determining 
 >the value of your home."
 
 ## Inital Questions and Hypotheses
